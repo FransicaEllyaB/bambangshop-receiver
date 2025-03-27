@@ -68,15 +68,15 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
     -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Commit: `Implement receive_notification function in Notification service.`
-    -   [ ] Commit: `Implement receive function in Notification controller.`
-    -   [ ] Commit: `Implement list_messages function in Notification service.`
-    -   [ ] Commit: `Implement list function in Notification controller.`
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Commit: `Implement receive_notification function in Notification service.`
+    -   [x] Commit: `Implement receive function in Notification controller.`
+    -   [x] Commit: `Implement list_messages function in Notification service.`
+    -   [x] Commit: `Implement list function in Notification controller.`
     -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
@@ -98,3 +98,21 @@ Rust tidak mengizinkan mutasi langsung terhadap static variable seperti di Java 
 
 
 #### Reflection Subscriber-2
+> Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not,
+explain why you did not do so. If yes, explain things that you have learned from those other
+parts of code.
+
+Di src/lib.rs, proyek ini mengimplementasikan konfigurasi aplikasi yang fleksibel menggunakan lazy_static dan Figment, memungkinkan pengaturan melalui environment variables dengan mudah. Fitur utamanya adalah kemampuan untuk me-load konfigurasi default yang bisa di-override melalui .env, serta sistem error handling khusus yang memungkinkan response error terstruktur. Dengan memanfaatkan crate tambahan seperti getset, kode berhasil membuat setter dan getter konfigurasi dengan ringkas, sambil mempertahankan kemudahan penggunaan dan fleksibilitas.
+
+> Since you have completed the tutorial by now and have tried to test your notification system
+by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug
+in more subscribers. How about spawning more than one instance of Main app, will it still be
+easy enough to add to the system? 
+
+Observer Pattern mempermudah penambahan Subscriber karena setiap Subscriber hanya perlu mendaftarkan dirinya ke Publisher, tanpa harus mengubah struktur kode utama. Ketika notifikasi dikirim, semua Subscriber yang terdaftar akan menerimanya secara otomatis, tanpa perlu penyesuaian tambahan. Dengan pola ini, kita bisa menambahkan atau menghapus Subscriber dengan mudah, tanpa memodifikasi kode Publisher. Jika kita menambahkan lebih dari satu instance dari Main App (Publisher), kompleksitasnya meningkat. Karena setiap instance dari Main App akan memiliki daftar Subscriber sendiri, kita harus memastikan bahwa Subscriber terhubung ke instance yang benar atau memiliki mekanisme pusat untuk menangani semua notifikasi. Jika tidak, bisa terjadi duplikasi notifikasi atau inkonsistensi data, terutama jika masing-masing instance mengelola Subscriber secara independen.
+
+> Have you tried to make your own Tests, or enhance documentation on your Postman
+collection? If you have tried those features, tell us whether it is useful for your work (it can be
+your tutorial work or your Group Project). 
+
+Saya belum pernah mencoba membuat test saya sendiri pada `Postman`. Namun, dari test yang diberikan di koleksi, terlihat Postman collection sangat berguna dalam pengembangan dan pengujian API, baik untuk pekerjaan tutorial maupun proyek kelompok. Dengan fitur testing di Postman, kita bisa membuat skrip otomatis untuk memverifikasi respons API, memastikan data yang dikirim benar, serta menghindari bug sebelum diintegrasikan ke dalam aplikasi utama.
